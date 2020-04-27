@@ -1,0 +1,17 @@
+{
+  "name": "myTVtracker_NodeJS",
+  "version": "1.0.0",
+  "description": "project for ti2",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "repository": "https://github.com/ricvigh/myTVtracker_NodeJS.git",
+  "author": "Ricardo Vieira",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
+  }
+}
