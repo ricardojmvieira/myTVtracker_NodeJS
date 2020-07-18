@@ -4,7 +4,7 @@ const jwt = require('../helpers/jwt.js');
 exports.register = (req, res) => {//chamar o serviço de utilizador e fazer o resgisto
     userService
         .register(req.body.username, req.body.password, req.body.role)//criar registo
-        .then(() => res.sendStatus(200))
+        .then(() => res.sendStatus(200).json({ success: true }))
         .catch((message) => res.status(500).send(message));
 };
 exports.login = (req, res) => {//iniciar sessão

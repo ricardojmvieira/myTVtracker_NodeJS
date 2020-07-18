@@ -1,5 +1,5 @@
 const MongoClient = require('mongodb').MongoClient;
-const mongodb = new MongoClient('mongodb://localhost:27017', { useUnifiedTopology: true });
+const mongodb = new MongoClient(process.env.MONGO_URI, { useUnifiedTopology: true });
 const connectDB = () => {
     return new Promise((resolve, reject) => {
         mongodb.connect(err => {
@@ -8,6 +8,6 @@ const connectDB = () => {
         });
     });
 };
-const getDB = () => mongodb.db('lessons');
+const getDB = () => mongodb.db('mytvtracker');//mytvtracker
 const disconnectDB = () => mongodb.close();
 module.exports = { connectDB, getDB, disconnectDB };

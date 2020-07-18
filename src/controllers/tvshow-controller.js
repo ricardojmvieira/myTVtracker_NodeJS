@@ -2,7 +2,7 @@ const tvshowService = require('../services/tvshow-mongodb.js');
 
 exports.getTvshows = (req, res) => {
     tvshowService
-        .getTvshows()
+        .getTvshows(req.query)
         .then(result => res.json(result))
         .catch(err => res.status(500).send(err.message));
 };

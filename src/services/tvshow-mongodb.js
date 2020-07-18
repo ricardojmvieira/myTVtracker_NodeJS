@@ -1,18 +1,23 @@
 const db = require('../configs/mongodb.js').getDB();
 const ObjectId = require('mongodb').ObjectID;
 
-exports.getTvshows = () => {
+exports.getTvshows = (queryString) => {
     return new Promise((resolve, reject) => {
+        let filter = {};
+        if (queryString.search) {
+            filter.title = { $regex: new RegExp(queryString.search, "i") };
+        }
         db
             .collection('tvshows')
-            .find()
-            .project({ 'nameTVshow': 1, 'ranking': 1, 'genre': 1 })
+            .find(filter)
+            .project({ nameTVshow: 1, ranking: 1, genre: 1 })
             .toArray()
-            .then(tvshows => resolve(tvshows))
+            .then((tvshows) => resolve(tvshows))
             .catch(err => reject(err));
     });
 };
-exports.getTvshow = id => {
+
+exports.getTvshow = (id) => {
     return new Promise((resolve, reject) => {
         db
             .collection('tvshows')
@@ -21,12 +26,19 @@ exports.getTvshow = id => {
             .catch(err => reject(err));
     });
 };
-exports.insertTvshow = body => {
+
+exports.insertTvshow = (body) => {
     return new Promise((resolve, reject) => {
         db
             .collection('tvshows')
-            .insertOne({ nameTVshow: body.nameTVshow, ranking: body.ranking, genre: body.genre, description: body.description })
-            .then(res => resolve({ _id: res.insertedId, inserted: res.result.n }))
+            .insertOne({
+                nameTVshow: body.nameTVshow,
+                ranking: body.ranking,
+                genre: body.genre,
+                description: body.description,
+                cover: body.cover
+            })
+            .then(res => resolve({ inserted: 1, _id: res.insertedId }))//ver
             .catch(err => reject(err));
     });
 };
@@ -42,6 +54,7 @@ exports.updateTvshow = (id, body) => {
                         ranking: body.ranking,
                         genre: body.genre,
                         description: body.description,
+                        cover: body.cover,
                     },
                 }
             )
@@ -49,6 +62,7 @@ exports.updateTvshow = (id, body) => {
             .catch(err => reject(err));
     });
 };
+
 exports.removeTvshow = id => {
     return new Promise((resolve, reject) => {
         db

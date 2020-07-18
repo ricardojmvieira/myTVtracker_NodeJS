@@ -1,13 +1,14 @@
-const router = require('express').Router();
 const tvshowController = require('../controllers/tvshow-controller.js');
-
+const router = require('express').Router();
 const authorize = require('../configs/authorization');
 const roles = require('../helpers/roles.js');
 
-router.get('', authorize(roles.Boss, roles.Servent), tvshowController.getTvshows);
-router.get('/:id', authorize(roles.Boss, roles.Servent), tvshowController.getTvshow);
-router.post('', authorize(roles.Boss), tvshowController.insertTvshow);
-router.put('/:id', authorize(roles.Boss), tvshowController.updateTvshow);
-router.delete('/:id', authorize(roles.Boss), tvshowController.removeTvshow);
+//tem de estar autenticado
+router.get('', authorize(), tvshowController.getTvshows);
+router.get('/:id', authorize(), tvshowController.getTvshow);
+//tem de estar autenticado e pertencer a este role
+router.post('', authorize(roles.Admin), tvshowController.insertTvshow);
+router.put('/:id', authorize(roles.Admin), tvshowController.updateTvshow);
+router.delete('/:id', authorize(roles.Admin), tvshowController.removeTvshow);
 
 module.exports = router;

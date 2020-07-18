@@ -1,8 +1,8 @@
-require('./configs/mongodb.js')
+require("dotenv").config()
+require("./configs/mongodb.js")
     .connectDB()
     .then(() => {
-        console.log(`\x1b[32m(PLAIN) Successfuly connected to database server\x1b[0m`);
-
+        console.log(`\x1b[32m(PLAIN) Successfuly connected to database server\x1b[0m`);
         //import dependencies and initialize express
         const express = require('express');
         const bodyParser = require('body-parser');
@@ -16,6 +16,8 @@ require('./configs/mongodb.js')
         //routes calls
         app.use('/tvshow', require('./routes/tvshow-route.js'));
         app.use('/user', require('./routes/user-route.js'));
+        app.use('/mytvshow', require('./routes/mytvshow-route.js'));
+        app.use('/genre', require('./routes/genretvshow-route.js'));
 
         //start node server
         const port = process.env.PORT || 5000;

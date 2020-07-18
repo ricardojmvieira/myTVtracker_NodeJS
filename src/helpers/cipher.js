@@ -1,5 +1,5 @@
 const crypto = require('crypto');//importar biblioteca
-const key = 'VpO0qDdiNgzXbSkjv9KR6Po8NvKPYkkS';//chave para decifrar texto
+const key = process.env.CIPHER_KEY;//chave para decifrar texto
 
 exports.generateIv = () => {
     return crypto.randomBytes(8).toString('hex');
