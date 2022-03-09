@@ -14,7 +14,7 @@ exports.getMyTvshow = (req, res) => {
 };
 exports.insertMyTvshow = (req, res) => {
     mytvshowService
-        .insertMyTvshow(req.params.id, req.client)
+        .insertMyTvshow(req.params.id, req.body.nameTVshow, req.client)
         .then(result => res.json(result))
         .catch(err => res.status(500).send(err.message));
 };

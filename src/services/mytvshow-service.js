@@ -7,7 +7,7 @@ exports.getMyTvshows = (userId) => {
         db
             .collection('users')
             .find({ _id: ObjectId(userId) })
-            .project({ tvshows: [{ tvshowId: 1, season: 1, episode: 1, state: 1 }] })
+            .project({ tvshows: { tvshowId: 1, nameTVshow: 1, season: 1, episode: 1, state: 1 } })
             .toArray()
             .then((mytvshows) => resolve(mytvshows))
             .catch(err => reject(err));
@@ -27,13 +27,11 @@ exports.getMyTvshow = (Idtvshow, userId) => {
                     }
                 })
             ))
-            /*, tvshows: { $elemMatch: { tvshowId: tvshowId } } */
-            //.then((tvshows) => resolve(tvshows))
             .catch((err) => reject(err));
     });
 };
 
-exports.insertMyTvshow = (tvshowId, userId) => {
+exports.insertMyTvshow = (tvshowId, nameTVshow, userId) => {
     return new Promise((resolve, reject) => {
         db.collection("users").updateOne(
             { _id: ObjectId(userId) },
@@ -41,11 +39,12 @@ exports.insertMyTvshow = (tvshowId, userId) => {
                 $push: {
                     tvshows: {
                         tvshowId: tvshowId,
+                        nameTVshow: nameTVshow,
                         season: 1,
                         episode: 1,
                         state: tvState.Starting,
                     }
-                }
+                },
             })
             .then(result => resolve(result))
             .catch(err => reject(err));
@@ -56,12 +55,13 @@ exports.updateMyTvshow = (id, body, userId) => {
     return new Promise((resolve, reject) => {
         db
             .collection('users')
-            .update(
+            .updateOne(
                 { _id: ObjectId(userId) },
                 {
                     $set: {
                         "tvshows.$[elem]": {
                             tvshowId: id,
+                            nameTVshow: body.nameTVshow,
                             season: body.season,
                             episode: body.episode,
                             state: body.state,
@@ -77,7 +77,7 @@ exports.removeMyTvshow = (id, userId) => {
     return new Promise((resolve, reject) => {
         db
             .collection('users')
-            .update(
+            .updateOne(
                 { _id: ObjectId(userId) },
                 { $pull: { tvshows: { tvshowId: id } } }
             )

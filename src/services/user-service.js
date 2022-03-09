@@ -12,9 +12,9 @@ exports.register = (username, rawPassword, role) => {
                         if (/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d$@$!%*#?&-.]{8,}$/.test(rawPassword)) {
                             const dataIv = cipher.generateIv();//criar vetor de inicialização para este utilizador
                             const password = cipher.encrypt(rawPassword, dataIv);//cifar a password com o vetor de inicialização
-                            db.collection('users').insertOne({ username, password, role, dataIv, tvshows: [] })//inserir o utilizador na db
-                                .then(() => resolve())
-                                .catch((error) => reject(error.message));
+                                db.collection('users').insertOne({ username, password, role, dataIv, tvshows: [] })//inserir o utilizador na db
+                                    .then((res) => resolve(res))
+                                    .catch((error) => reject(error.message));
                         } else reject('invalid password');
                     } else reject('invalid role');
                 } else reject('username already in use');
