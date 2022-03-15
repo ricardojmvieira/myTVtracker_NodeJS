@@ -25,7 +25,6 @@ exports.insertGenreTvshow = (body) => {
 };
 exports.removeGenreTvshow = (genreId) => {
     return new Promise((resolve, reject) => {
-        console.log(genreId)
         db
             .collection('genres')
             .deleteOne({ _id: ObjectId(genreId) })

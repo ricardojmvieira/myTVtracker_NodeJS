@@ -1,0 +1,28 @@
+[{
+  "_id": {
+    "$oid": "6216504a9ef7ce3accd2dda2"
+  },
+  "nameTVshow": "Daredevil",
+  "ranking": "8.7",
+  "genre": "Aventura, Ação",
+  "description": "Advogado cego que combate o mal nas ruas noturnas de Hell's Kitchen",
+  "cover": null
+},{
+  "_id": {
+    "$oid": "6216ecc7aa3d6005c03f032a"
+  },
+  "nameTVshow": "Dark",
+  "ranking": "8.8",
+  "genre": "Mistério",
+  "description": "Boa serie alemã",
+  "cover": null
+},{
+  "_id": {
+    "$oid": "62176d97226a772b8493d4cd"
+  },
+  "nameTVshow": "Chuck",
+  "ranking": "8.2",
+  "genre": "Ação",
+  "description": "",
+  "cover": null
+}]

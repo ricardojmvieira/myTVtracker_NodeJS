@@ -1,0 +1,21 @@
+[{
+  "_id": {
+    "$oid": "621650899ef7ce3accd2dda3"
+  },
+  "nameGenre": "Aventura"
+},{
+  "_id": {
+    "$oid": "62168e2c063e5802b84219db"
+  },
+  "nameGenre": "Ficção Científica"
+},{
+  "_id": {
+    "$oid": "62176c13226a772b8493d4cb"
+  },
+  "nameGenre": "Ação"
+},{
+  "_id": {
+    "$oid": "622942cea64fd431687bd793"
+  },
+  "nameGenre": "Drama"
+}]
